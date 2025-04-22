@@ -1,0 +1,7 @@
+---
+const { className, ...props } = Astro.props;
+---
+
+<a class:list={["group -m-1 p-1", className]} {...props}>
+    <slot />
+</a>

@@ -1,16 +1,55 @@
 ---
-
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import SocialLink from "@components/SocialLink.astro";
+import XIcon from "@/src/icons/XIcon.astro";
+import InstagramIcon from "@/src/icons/InstagramIcon.astro";
+import GitHubIcon from "@/src/icons/GithubIcon.astro";
+import LinkedInIcon from "@/src/icons/LinkedinIcon.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home">
+    <Fragment>
+        <Container className="mt-9">
+            <div class="max-w-2xl">
+                <h1
+                    class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100"
+                >
+                    Software designer, founder, and anime lover.
+                </h1>
+                <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+                    I’m Spencer, a software designer and entrepreneur based in
+                    New York City. I’m the founder and CEO of Planetaria, where
+                    we develop technologies that empower regular people to
+                    explore space on their own terms.
+                </p>
+
+                <div class="mt-6 flex gap-6">
+                    <SocialLink href="#" aria-label="Follow on X">
+                        <XIcon
+                            class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
+                        />
+                    </SocialLink>
+
+                    <SocialLink href="#" aria-label="Follow on Instagram">
+                        <InstagramIcon
+                            class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
+                        />
+                    </SocialLink>
+
+                    <SocialLink href="#" aria-label="Follow on GitHub">
+                        <GitHubIcon
+                            class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
+                        />
+                    </SocialLink>
+
+                    <SocialLink href="#" aria-label="Follow on LinkedIn">
+                        <LinkedInIcon
+                            class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
+                        />
+                    </SocialLink>
+                </div>
+            </div>
+        </Container>
+    </Fragment>
+</Layout>
