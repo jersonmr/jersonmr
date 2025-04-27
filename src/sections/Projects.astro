@@ -1,0 +1,72 @@
+---
+import CodeIcon from "@icons/CodeIcon.astro";
+import Badge from "@components/Badge.astro";
+interface Project {
+    id: number;
+    title: string;
+    description: string;
+    url: string;
+    technologies: string[];
+}
+
+interface Props {
+    projects: Project[];
+    locale: string;
+}
+
+const { projects, locale }: Props = Astro.props;
+
+const messages = {
+    en: (await import("../locales/en.json")).default,
+    es: (await import("../locales/es.json")).default,
+};
+
+// Fallback a inglés si no lo reconocemos
+const t = messages[locale as keyof typeof messages] || messages["en"];
+
+// const response = await fetch("http://jersonmr.test/api/projects", {
+//     headers: {
+//         "Accept-Language": locale,
+//         Locale: locale,
+//     },
+// });
+// const { data: projects } = (await response.json()) as { data: Project[] };
+---
+
+<div class="pt-7">
+    <div class="flex items-center gap-x-2">
+        <CodeIcon class="size-7 text-white" />
+        <h2
+            class="text-2xl font-semibold tracking-tight text-zinc-800 sm:text-3xl dark:text-zinc-100 flex gap-x-3"
+        >
+            {t.projects.title}
+        </h2>
+    </div>
+
+    <div
+        class="grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-6 lg:grid-cols-3 lg:gap-x-8"
+    >
+        {
+            projects.map((project) => {
+                const { title, description, url, technologies } = project;
+                return (
+                    <div>
+                        <a
+                            href={url}
+                            class="text-lg font-semibold"
+                            target="_blank"
+                        >
+                            {title}
+                        </a>
+                        <p class="text-sm text-zinc-500">{description}</p>
+                        <div class="flex gap-x-2">
+                            {technologies.map((technology: string) => (
+                                <Badge text={technology} />
+                            ))}
+                        </div>
+                    </div>
+                );
+            })
+        }
+    </div>
+</div>

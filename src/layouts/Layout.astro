@@ -1,6 +1,20 @@
 ---
 import Header from "@layouts/Header.astro";
+import type { UserData } from "@/src/interfaces/user-data.interface";
 const { title } = Astro.props;
+
+const locale = Astro.currentLocale ?? "en";
+
+const response = await fetch("http://jersonmr.test/api/user-data", {
+    headers: {
+        "Accept-Language": locale,
+        Locale: locale,
+    },
+});
+
+const { data: userData } = (await response.json()) as {
+    data: UserData["data"];
+};
 ---
 
 <!doctype html>
@@ -11,7 +25,7 @@ const { title } = Astro.props;
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <title>{title}</title>
+        <title>Jerson Moreno - {title}</title>
     </head>
     <body class="flex h-full bg-zinc-50 dark:bg-black">
         <div class="flex w-full">
@@ -24,7 +38,7 @@ const { title } = Astro.props;
                 </div>
             </div>
             <div class="relative flex w-full flex-col">
-                <Header />
+                <Header avatar={userData.photo} />
                 <main class="flex-auto">
                     <slot />
                 </main>

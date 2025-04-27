@@ -1,23 +1,22 @@
 ---
 import { Image } from "astro:assets";
 import avatarImage from "@images/avatar.png";
+import type { ImageMetadata } from "astro";
 
 interface Props {
     large?: boolean;
     className?: string;
+    src?: string | ImageMetadata;
 }
 
-const { large = false, className, ...props }: Props = Astro.props;
+const { large = false, className, src, ...props }: Props = Astro.props;
+const imgClass = `rounded-full bg-zinc-100 object-cover dark:bg-zinc-800 ${large ? "h-16 w-16" : "h-9 w-9"}`;
 ---
 
 <a href="/" class:list={["pointer-events-auto", className]} {...props}>
-    <Image
-        src={avatarImage}
+    <img
+        src={src ? (typeof src === "string" ? src : src.src) : avatarImage.src}
         alt="Avatar"
-        class:list={[
-            "rounded-full bg-zinc-100 object-cover dark:bg-zinc-800",
-            large ? "h-16 w-16" : "h-9 w-9",
-        ]}
-        priority
+        class={imgClass}
     />
 </a>

@@ -1,0 +1,50 @@
+---
+import type { SocialLinks } from "@/src/interfaces/user-data.interface";
+import SocialLink from "@/src/components/SocialLink.astro";
+import XIcon from "@/src/icons/XIcon.astro";
+import InstagramIcon from "@/src/icons/InstagramIcon.astro";
+import GithubIcon from "@/src/icons/GithubIcon.astro";
+import LinkedinIcon from "@/src/icons/LinkedinIcon.astro";
+
+interface Props {
+    social_links: SocialLinks;
+}
+
+const { social_links }: Props = Astro.props;
+
+const { x_url, github_url, linkedin_url } = social_links;
+---
+
+<div class="mt-6 flex gap-6">
+    {
+        x_url && (
+            <SocialLink href={x_url} aria-label="Follow on X">
+                <XIcon class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+            </SocialLink>
+        )
+    }
+
+    {
+        x_url && (
+            <SocialLink href={x_url} aria-label="Follow on Instagram">
+                <InstagramIcon class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+            </SocialLink>
+        )
+    }
+
+    {
+        github_url && (
+            <SocialLink href={github_url} aria-label="Follow on GitHub">
+                <GithubIcon class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+            </SocialLink>
+        )
+    }
+
+    {
+        linkedin_url && (
+            <SocialLink href={linkedin_url} aria-label="Follow on LinkedIn">
+                <LinkedinIcon class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+            </SocialLink>
+        )
+    }
+</div>
